@@ -1,6 +1,5 @@
 (library
- (public_name lambda_streams)
- (inline_tests)
  (name lambda_streams)
+ (inline_tests)
  (preprocess
   (pps ppx_inline_test)))

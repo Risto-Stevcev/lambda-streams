@@ -1,7 +1,9 @@
 (lang dune 2.3.1)
+(name lambda_streams)
 
 (generate_opam_files true)
 
+(version 0.1.0)
 (source (github Risto-Stevcev/lambda-streams))
 (license BSD-3-Clause)
 (authors "Risto Stevcev")

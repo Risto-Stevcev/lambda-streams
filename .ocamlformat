@@ -1,4 +1,4 @@
-version=0.12
+version=0.13.0
 margin=100
 break-cases=fit-or-vertical
 break-collection-expressions=fit-or-vertical
@@ -19,3 +19,4 @@ space-around-arrays=false
 space-around-lists=false
 space-around-variants=false
 space-around-records=true
+doc-comments=before
