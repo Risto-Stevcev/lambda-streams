@@ -5,9 +5,18 @@ Lambda-based streaming library
 
 ## Installation
 
+For native ocaml:
+
 ```sh
 opam install lambda-streams
 ```
+
+For bucklescript:
+
+```sh
+yarn add lambda-streams
+```
+
 
 ## Documentation
 
