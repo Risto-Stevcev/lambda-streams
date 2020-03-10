@@ -3,10 +3,12 @@ all: build
 .PHONY: clean
 clean:
 	dune clean
+	bsb -clean-world
 
 .PHONY: build
 build:
 	dune build @all
+	bsb -make-world
 
 .PHONY: fmt
 fmt:
@@ -35,3 +37,7 @@ test:
 .PHONY: watch-test
 watch-test:
 	dune runtest --no-buffer -w
+
+.PHONY: watch-bs
+watch-bs:
+	bsb -make-world -w

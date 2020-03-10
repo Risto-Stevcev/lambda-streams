@@ -1,3 +1,5 @@
-_build
 .merlin
-_opam
+_build/
+_opam/
+lib/
+node_modules/
