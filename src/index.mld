@@ -1,0 +1,20 @@
+{1:top Lambda_streams}
+
+{i Lambda_streams} is a simple streaming library based on using lambdas and closures as a basis to
+write simple, composable streams. It's inspired by {{:https://github.com/callbag/callbag}callbag}.
+
+{2 Generic streams}
+{3 Sync}
+{!Lambda_streams.Sync} streams
+
+{3 Async}
+{!Lambda_streams.Async} streams
+
+
+{2 Finite streams}
+{3 Finite.Sync}
+{!Lambda_streams.Finite.Sync} streams
+
+{3 Finite.Async}
+{!Lambda_streams.Finite.Async} streams
+

@@ -15,4 +15,5 @@
  (depends
   (alcotest (and (= 1.0.1) :with-test))
   (fmt (and (= 0.8.8) :with-test))
+  (odoc (and (= 1.5.0) :with-doc))
   (dune (and (>= 2.3.1) (< 3.0)))))

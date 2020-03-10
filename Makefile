@@ -12,13 +12,21 @@ build:
 fmt:
 	dune build @fmt --auto-promote
 
-.PHONY: doc
-doc:
+.PHONY: docs
+docs:
 	dune build @doc
 
-.PHONY: open-doc
-open-doc:
-	xdg-open _build/default/_doc/_html/index.html
+.PHONY: copy-docs
+copy-docs: docs
+	cp -r _build/default/_doc/_html/** docs/
+
+.PHONY: open-docs
+open-docs: copy-docs
+	xdg-open docs/index.html
+
+.PHONY: clean-docs
+clean-docs:
+	rm -rf docs/**
 
 .PHONY: test
 test:
