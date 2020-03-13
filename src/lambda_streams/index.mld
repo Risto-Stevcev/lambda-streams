@@ -17,3 +17,11 @@ simple, composable streams. It's inspired by {{:https://github.com/callbag/callb
 
 {3 Finite.Async}
 {!Lambda_streams.Finite.Async} streams
+
+{2 Lwt and Async helpers }
+{ul
+  {- {{:https://opam.ocaml.org/packages/lwt}Lwt} helpers are in the [Lambda_streams_lwt] package.}
+  {- {{:https://opam.ocaml.org/packages/async}Async} helpers are in the [Lambda_streams_async]
+     package.
+  }
+}

@@ -15,7 +15,7 @@ fmt:
 	dune build @fmt --auto-promote
 
 .PHONY: docs
-docs:
+docs: clean-docs
 	dune build @doc
 
 .PHONY: copy-docs

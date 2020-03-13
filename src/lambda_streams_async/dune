@@ -1,0 +1,3 @@
+(library
+ (name lambda_streams_async)
+ (libraries lambda_streams async))

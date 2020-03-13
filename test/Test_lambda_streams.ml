@@ -1,4 +1,5 @@
 let () =
+  print_newline ();
   Alcotest.run
     "Lambda_streams"
     [

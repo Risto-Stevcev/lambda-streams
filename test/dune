@@ -1,4 +1,15 @@
 (tests
- (names test_lambda_streams)
- (libraries alcotest fmt lambda_streams)
+ (names test_lambda_streams test_lambda_streams_lwt test_lambda_streams_async)
+ (libraries
+  alcotest
+  alcotest-lwt
+  alcotest-async
+  async
+  async_kernel
+  lwt
+  lwt.unix
+  fmt
+  lambda_streams
+  lambda_streams_lwt
+  lambda_streams_async)
  (action (run %{test})))
