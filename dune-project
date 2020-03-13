@@ -1,4 +1,4 @@
-(lang dune 2.3.1)
+(lang dune 2.4.0)
 (name lambda_streams)
 (version 0.1.0)
 (source (github Risto-Stevcev/lambda-streams))
@@ -7,6 +7,7 @@
 (maintainers "me@risto.codes")
 (generate_opam_files true)
 (implicit_transitive_deps false)
+(using mdx 0.1)
 
 (package
  (name lambda_streams)
@@ -16,4 +17,5 @@
   (alcotest (and (= 1.0.1) :with-test))
   (fmt (and (= 0.8.8) :with-test))
   (odoc (and (= 1.5.0) :with-doc))
-  (dune (and (>= 2.3.1) (< 3.0)))))
+  (mdx (= 1.6.0))
+  (dune (and (>= 2.4.0) (< 3.0)))))
