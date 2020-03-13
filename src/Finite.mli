@@ -16,8 +16,8 @@ module Sync : sig
 
   val from_array : 'a array -> 'a input
 
-  (** Pipes a finite input stream into an output stream. *)
-  val pipe : 'a Sync.output -> 'a input -> unit
+  (** Pipes an input stream into an output stream. *)
+  val pipe : 'a output -> 'a input -> unit
 
   val map : ('a -> 'b) -> 'a input -> 'b input
 
@@ -65,7 +65,7 @@ module Async : sig
 
   (**
    Takes [n] elements from an infinite stream and converts it to a finite one. Optionally takes an
-   output stream ([?close]) to close the connection at {!Signal.EndOfSignal} if the async stream it
+   output stream ([?close]) to close the connection at {!Signal.EndOfSignal} if the async stream is
    connection-based.
    *)
   val take' : ?close:unit Sync.output -> int -> 'a Async.t -> 'a t

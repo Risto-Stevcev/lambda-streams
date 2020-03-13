@@ -14,7 +14,10 @@ type 'a connection' = ('a input, unit output) Connection.t
 
 val make : (('a -> unit) -> unit) -> 'a t
 
-(** Listens for values from an asynchronous stream, somewhat similar to {!Sync.next}. *)
+(**
+ Listens for values from an asynchronous stream, somewhat similar to {!Sync.next} but push-based
+ instead of pull-based.
+ *)
 val listen : ('a -> unit) -> 'a t -> unit
 
 val pure : 'a -> 'a t
