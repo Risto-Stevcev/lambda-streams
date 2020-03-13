@@ -34,6 +34,10 @@ clean-docs:
 test:
 	dune runtest --no-buffer
 
+.PHONY: watch
+watch:
+	dune build @all -w
+
 .PHONY: watch-test
 watch-test:
 	dune runtest --no-buffer -w
@@ -41,3 +45,7 @@ watch-test:
 .PHONY: watch-bs
 watch-bs:
 	bsb -make-world -w
+
+.PHONY: utop
+utop:
+	dune utop .

@@ -17,6 +17,16 @@ let test_pure _ = Alcotest.(check (signal int)) "" (Signal.pure 123) (Data 123)
 
 let test_empty _ = Alcotest.(check (signal int)) "" (Signal.empty ()) EndOfSignal
 
+let test_default _ =
+  Alcotest.(check string) "" (Signal.pure "foo" |> Signal.default "bar") "foo";
+  Alcotest.(check string) "" (Signal.empty () |> Signal.default "bar") "bar"
+
+let test_satisfies _ =
+  let is_even x = x mod 2 = 0 in
+  Alcotest.(check bool) "" (Signal.pure 1 |> Signal.satisfies is_even) false;
+  Alcotest.(check bool) "" (Signal.pure 2 |> Signal.satisfies is_even) true;
+  Alcotest.(check bool) "" (Signal.empty () |> Signal.satisfies is_even) false
+
 let test_map _ =
   Alcotest.(check (signal int)) "" (Signal.pure 123 |> Signal.map (( + ) 1)) (Signal.pure 124);
   Alcotest.(check (signal int)) "" (Signal.empty () |> Signal.map (( + ) 1)) (Signal.empty ())
@@ -39,6 +49,8 @@ let suite =
   [
     "pure", `Quick, test_pure;
     "empty", `Quick, test_empty;
+    "default", `Quick, test_default;
+    "satisfies", `Quick, test_satisfies;
     "map", `Quick, test_map;
     "filter", `Quick, test_filter;
     "fold", `Quick, test_fold;

@@ -4,7 +4,7 @@
   "namespace": true,
   "sources": [{
     "dir" : "src",
-    "files" : ["Async.ml", "Finite.ml", "Signal.ml", "Sync.ml"]
+    "files" : ["Async.ml", "Finite.ml", "Signal.ml", "Sync.ml", "Connection.ml"]
   }],
   "package-specs": {
     "module": "commonjs",

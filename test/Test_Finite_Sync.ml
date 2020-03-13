@@ -92,6 +92,19 @@ let test_from_array _ =
   Alcotest.(check (signal int)) "" (Sync.next stream) EndOfSignal;
   Alcotest.(check (signal int)) "" (Sync.next stream) EndOfSignal
 
+let test_pipe _ =
+  let accumulated_values = ref [] in
+  let output_stream =
+    Sync.make_output @@ fun value -> accumulated_values := value :: !accumulated_values
+  in
+  Sync.enumerate () |> Finite.Sync.take' 5 |> Finite.Sync.pipe output_stream;
+  Alcotest.(check (list int)) "" !accumulated_values [5; 4; 3; 2; 1];
+
+  let value = ref None in
+  let output_stream2 = Sync.make_output @@ fun v -> value := Some v in
+  Finite.Sync.pure 123 |> Finite.Sync.pipe output_stream2;
+  Alcotest.(check (option int)) "" !value (Some 123)
+
 let test_map _ =
   let stream = Finite.Sync.pure 123 |> Finite.Sync.map (( + ) 1) in
   Alcotest.(check (signal int)) "" (Sync.next stream) (Data 124);
@@ -107,6 +120,48 @@ let test_map _ =
   Alcotest.(check (signal int)) "" (Sync.next stream3) EndOfSignal;
   Alcotest.(check (signal int)) "" (Sync.next stream3) EndOfSignal
 
+let test_filter _ =
+  let is_even x = x mod 2 = 0 in
+  let stream = Sync.enumerate () |> Finite.Sync.take' 10 |> Finite.Sync.filter is_even in
+  Alcotest.(check (finite_sync int)) "" stream (Finite.Sync.from_list [2; 4; 6; 8; 10]);
+  Alcotest.(check (finite_sync int))
+    ""
+    (Finite.Sync.empty () |> Finite.Sync.filter is_even)
+    (Finite.Sync.empty ())
+
+let test_take _ =
+  Alcotest.(check (finite_sync int))
+    ""
+    (Finite.Sync.from_list [1; 2; 3; 4; 5] |> Finite.Sync.take 3)
+    (Finite.Sync.from_list [1; 2; 3])
+
+let test_take' _ =
+  Alcotest.(check (finite_sync int))
+    ""
+    (Sync.enumerate () |> Finite.Sync.take' 5)
+    (Finite.Sync.from_list [1; 2; 3; 4; 5])
+
+let test_skip _ =
+  Alcotest.(check (finite_sync int))
+    ""
+    (Finite.Sync.from_list [1; 2; 3; 4; 5] |> Finite.Sync.skip 3)
+    (Finite.Sync.from_list [4; 5]);
+
+  Alcotest.(check (finite_sync int))
+    ""
+    (Finite.Sync.from_list [1; 2; 3; 4; 5] |> Finite.Sync.skip 0)
+    (Finite.Sync.from_list [1; 2; 3; 4; 5]);
+
+  Alcotest.(check (finite_sync int))
+    ""
+    (Finite.Sync.from_list [1; 2; 3; 4; 5] |> Finite.Sync.skip 5)
+    (Finite.Sync.empty ());
+
+  Alcotest.(check (finite_sync int))
+    ""
+    (Finite.Sync.from_list [1; 2; 3; 4; 5] |> Finite.Sync.skip 6)
+    (Finite.Sync.empty ())
+
 let test_until _ =
   let stream = Finite.Sync.pure 123 |> Finite.Sync.until (( < ) 3) in
   Alcotest.(check (signal int)) "" (Sync.next stream) (Data 123);
@@ -121,6 +176,37 @@ let test_until _ =
 
 let test_fold_left _ =
   Alcotest.(check int) "" (Finite.Sync.from_array [|1; 2; 3|] |> Finite.Sync.fold_left ( + ) 0) 6
+
+let test_concat _ =
+  Alcotest.(check (finite_sync int))
+    ""
+    (Finite.Sync.concat
+       [
+         Finite.Sync.from_list [1; 2; 3];
+         Finite.Sync.from_list [4; 5; 6];
+         Finite.Sync.from_list [7; 8; 9; 10];
+       ])
+    (Finite.Sync.from_list [1; 2; 3; 4; 5; 6; 7; 8; 9; 10]);
+  Alcotest.(check (finite_sync int))
+    ""
+    (Finite.Sync.concat
+       [
+         Finite.Sync.empty ();
+         Finite.Sync.from_list [1; 2; 3];
+         Finite.Sync.empty ();
+         Finite.Sync.from_list [4; 5; 6];
+       ])
+    (Finite.Sync.from_list [1; 2; 3; 4; 5; 6])
+
+let test_flatten _ =
+  let stream_of_streams =
+    Finite.Sync.from_list
+      [Finite.Sync.from_list [1; 2; 3]; Finite.Sync.empty (); Finite.Sync.from_list [4; 5; 6]]
+  in
+  Alcotest.(check (finite_sync int))
+    ""
+    (Finite.Sync.flatten stream_of_streams)
+    (Finite.Sync.from_list [1; 2; 3; 4; 5; 6])
 
 let test_to_rev_list _ =
   Alcotest.(check (list int))
@@ -148,9 +234,16 @@ let suite =
     "empty", `Quick, test_empty;
     "from_list", `Quick, test_from_list;
     "from_array", `Quick, test_from_array;
+    "pipe", `Quick, test_pipe;
     "map", `Quick, test_map;
+    "filter", `Quick, test_filter;
+    "take", `Quick, test_take;
+    "take'", `Quick, test_take';
+    "skip", `Quick, test_skip;
     "until", `Quick, test_until;
     "fold_left", `Quick, test_fold_left;
+    "concat", `Quick, test_concat;
+    "flatten", `Quick, test_flatten;
     "to_rev_list", `Quick, test_to_rev_list;
     "to_list", `Quick, test_to_list;
     "to_array", `Quick, test_to_array;

@@ -6,6 +6,14 @@ let pure (value : 'a) : 'a t = Data value
 
 let empty () : 'a t = EndOfSignal
 
+let default default_value = function
+  | Data value -> value
+  | EndOfSignal -> default_value
+
+let satisfies f = function
+  | Data value -> f value
+  | EndOfSignal -> false
+
 let map (f : 'a -> 'b) (ma : 'a t) : 'b t =
   match ma with
   | Data value -> Data (f value)
