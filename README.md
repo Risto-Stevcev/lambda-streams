@@ -1,6 +1,6 @@
 # lambda-streams
 
-Lambda-based streaming library
+A lambda-based streaming library. Read the introduction [here][1].
 
 
 ## Installation
