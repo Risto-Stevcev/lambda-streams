@@ -42,5 +42,7 @@
   (ocaml (>= 4.06))
   (async (and (>= 0.13.0) (< 0.14)))
   (async_kernel (and (>= 0.13.0) (< 0.14)))
+  (async_unix (and (>= 0.13.0) (< 0.14)))
+  (core (and (>= 0.13.0) (< 0.14)))
   (lambda_streams (= :version))
   (dune (and (>= 2.4.0) (< 3.0)))))

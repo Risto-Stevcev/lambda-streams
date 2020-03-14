@@ -150,13 +150,13 @@ module Async = struct
   let empty () = Async.make @@ fun cb -> cb Signal.EndOfSignal
 
   let from_list list =
-    let list' = ref list in
-    Async.make @@ fun cb ->
-    match !list' with
-    | value :: rest ->
-        list' := rest;
-        cb (Signal.Data value)
-    | [] -> cb EndOfSignal
+    let rec go cb = function
+      | value :: rest ->
+          cb (Signal.Data value);
+          go cb rest
+      | [] -> cb EndOfSignal
+    in
+    Async.make @@ fun cb -> go cb list
 
   let map f stream =
     Async.make @@ fun cb -> stream |> Async.listen (fun value -> cb (Signal.map f value))

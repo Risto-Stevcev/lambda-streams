@@ -12,6 +12,8 @@ depends: [
   "ocaml" {>= "4.06"}
   "async" {>= "0.13.0" & < "0.14"}
   "async_kernel" {>= "0.13.0" & < "0.14"}
+  "async_unix" {>= "0.13.0" & < "0.14"}
+  "core" {>= "0.13.0" & < "0.14"}
   "lambda_streams" {= version}
   "dune" {>= "2.4.0" & < "3.0"}
 ]

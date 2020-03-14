@@ -6,6 +6,9 @@
   alcotest-async
   async
   async_kernel
+  async_unix
+  core
+  core_kernel
   lwt
   lwt.unix
   fmt
