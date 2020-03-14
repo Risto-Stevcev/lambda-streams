@@ -20,7 +20,7 @@ yarn add lambda-streams
 
 ## Documentation
 
-See [documentation][1]
+See [documentation][2]
 
 
 ## Examples
@@ -39,8 +39,9 @@ val bar : int list = [2; 4; 6]
 
 ## License
 
-See [LICENSE][2]
+See [LICENSE][3]
 
 
-[1]: https://risto-stevcev.github.io/lambda-streams/
-[2]: https://github.com/Risto-Stevcev/lambda-streams/blob/master/LICENSE
+[1]: https://risto-stevcev.github.io/lambda-streams/lambda_streams
+[2]: https://risto-stevcev.github.io/lambda-streams
+[3]: https://github.com/Risto-Stevcev/lambda-streams/blob/master/LICENSE
