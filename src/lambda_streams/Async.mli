@@ -42,7 +42,16 @@ module type INTERVAL = sig
 end
 
 module Interval (I : INTERVAL) : sig
-  (** Creates an infinite async stream that enumerates the natural numbers every [ms]. *)
+  (**
+   Creates an infinite async stream that enumerates the natural numbers every [ms].
+
+   If this stream is converted to a finite stream with {!Lambda_streams.Finite.Async.take'} it will
+   still be considered active (the interval will not be cleared). It will just stop sending signals
+   after whatever [n] was passed to [take'].
+
+   To get an infinite async stream that can be converted later into a finite stream that ends, use
+   {!make} and pass the output stream that closes it to {!Lambda_streams.Finite.Async.take'}.
+   *)
   val forever : ms:int -> int t
 
   (**
