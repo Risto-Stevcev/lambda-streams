@@ -1,8 +1,14 @@
 let ( >>= ) = Lwt.( >>= )
 
+let test_first_to_lwt _ () =
+  Lambda_streams.Finite.Async.from_list ["foo"; "bar"; "baz"]
+  |> Lambda_streams_lwt.Async.first_to_lwt
+  >>= fun value -> Alcotest.(check string) "" value "foo" |> Lwt.return
+
 let test_last_to_lwt _ () =
-  Lambda_streams.Finite.Async.pure "foobar" |> Lambda_streams_lwt.Async.last_to_lwt >>= fun value ->
-  Alcotest.(check string) "" value "foobar" |> Lwt.return
+  Lambda_streams.Finite.Async.from_list ["foo"; "bar"; "baz"]
+  |> Lambda_streams_lwt.Async.last_to_lwt
+  >>= fun value -> Alcotest.(check string) "" value "baz" |> Lwt.return
 
 let test_to_lwt_list _ () =
   Lambda_streams.Finite.Async.from_list ["foo"; "bar"; "baz"]
@@ -39,6 +45,7 @@ let () =
        [
          ( "Async",
            [
+             test_first_to_lwt;
              test_last_to_lwt;
              test_to_lwt_list;
              test_from_lwt;

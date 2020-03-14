@@ -1,5 +1,7 @@
+(** Gets the first value of a lambda stream and turns it into a deferred value *)
 val first_to_async : 'a Lambda_streams.Finite.Async.t -> 'a Async_kernel.Deferred.t
 
+(** Gets the last value of a lambda stream and turns it into a deferred value *)
 val last_to_async : 'a Lambda_streams.Finite.Async.t -> 'a Async_kernel.Deferred.t
 
 val to_async_list : 'a Lambda_streams.Finite.Async.t -> 'a list Async_kernel.Deferred.t

@@ -1,5 +1,8 @@
 open Lambda_streams
 
+(** Gets the first value from a lambda stream and turns it into a lwt promise *)
+val first_to_lwt : 'a Finite.Async.t -> 'a Lwt.t
+
 (** Gets the last value from a lambda stream and turns it into a lwt promise *)
 val last_to_lwt : 'a Finite.Async.t -> 'a Lwt.t
 

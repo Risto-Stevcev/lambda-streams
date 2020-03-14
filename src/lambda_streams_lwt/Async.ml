@@ -7,6 +7,20 @@ let to_lwt_stream stream =
   stream |> Async.listen (fun value -> value |> Signal.to_option |> push);
   lwt_stream
 
+let first_to_lwt stream =
+  let mvar = Lwt_mvar.create_empty () and fulfilled = ref false in
+  stream
+  |> Async.listen (fun value ->
+         match value, !fulfilled with
+         | Signal.Data value', false ->
+             Lwt_mvar.put mvar value'
+             >>= (fun () ->
+                   fulfilled := true;
+                   Lwt.return ())
+             |> ignore
+         | _ -> ());
+  Lwt_mvar.take mvar
+
 let last_to_lwt stream = stream |> to_lwt_stream |> Lwt_stream.last_new
 
 let to_lwt_list stream = stream |> to_lwt_stream |> Lwt_stream.to_list
