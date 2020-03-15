@@ -1,5 +1,6 @@
 (tests
  (names test_lambda_streams_async)
+ (package lambda_streams_async)
  (libraries
    alcotest
    alcotest-async
