@@ -92,6 +92,11 @@ baked implicitly into the streams. This makes readable streams much simpler and 
   }
 }
 
+{2 Javascript Promise Helpers }
+The {{:https://github.com/Risto-Stevcev/lambda-streams-promise}lambda-streams-promise} package
+provides javascript promise helpers. See the docs
+{{:https://risto-stevcev.github.io/lambda-streams-promise}here}.
+
 {2 Differences From }
 There are many streaming libraries out there in many languages, so why yet another one?
 
