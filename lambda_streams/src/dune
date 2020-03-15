@@ -5,3 +5,7 @@
 (documentation
  (package lambda_streams)
  (mld_files ("index")))
+
+(mdx
+ (files README.md)
+ (packages lambda_streams))
