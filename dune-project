@@ -1,13 +1,12 @@
-(lang dune 2.4.0)
+(lang dune 2.2.0)
 (name lambda_streams)
-(version 0.1.0)
+(version 0.1.1)
 (source (github Risto-Stevcev/lambda-streams))
 (license BSD-3-Clause)
 (authors "Risto Stevcev")
 (maintainers "me@risto.codes")
 (generate_opam_files true)
 (implicit_transitive_deps false)
-(using mdx 0.1)
 
 (package
  (name lambda_streams)
@@ -18,9 +17,9 @@
   (ocaml (and (>= 4.06.1) (<= 4.10.0)))
   (alcotest (and (= 1.0.1) :with-test))
   (fmt (and (= 0.8.8) :with-test))
+  (mdx (and (= 1.6.0) :with-test))
   (odoc (and (= 1.5.0) :with-doc))
-  (mdx (= 1.6.0))
-  (dune (= 2.4.0))))
+  (dune (= 2.2.0))))
 
 (package
  (name lambda_streams_lwt)
@@ -29,20 +28,22 @@
  (depends
   (ocaml (and (>= 4.06.1) (<= 4.10.0)))
   (lambda_streams (= :version))
-  (lwt (= 5.2.0))
+  (alcotest (and (= 1.0.1) :with-test))
   (alcotest-lwt (and (= 1.0.1) :with-test))
-  (dune (= 2.4.0))))
+  (lwt (>= 5.2.0))
+  (dune (= 2.2.0))))
 
 (package
  (name lambda_streams_async)
  (synopsis "Async helpers for lambda_streams")
  (documentation "https://risto-stevcev.github.io/lambda-streams")
  (depends
-  (ocaml (and (>= 4.06.1) (<= 4.10.0)))
+  (ocaml (and (>= 4.07) (<= 4.10.0)))
   (lambda_streams (= :version))
+  (alcotest (and (= 1.0.1) :with-test))
   (alcotest-async (and (= 1.0.1) :with-test))
-  (async (= v0.13.0))
-  (async_kernel (= v0.13.0))
-  (async_unix (= v0.13.0))
-  (core (= v0.13.0))
-  (dune (= 2.4.0))))
+  (async (and (>= v0.12.0) (<= v0.13.0)))
+  (async_kernel (and (>= v0.12.0) (<= v0.13.0)))
+  (async_unix (and (>= v0.12.0) (<= v0.13.0)))
+  (core (and (>= v0.12.0) (<= v0.13.0)))
+  (dune (= 2.2.0))))
