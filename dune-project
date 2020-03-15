@@ -17,8 +17,6 @@
  (depends
   (ocaml (and (>= 4.06.1) (<= 4.10.0)))
   (alcotest (and (= 1.0.1) :with-test))
-  (alcotest-lwt (and (= 1.0.1) :with-test))
-  (alcotest-async (and (= 1.0.1) :with-test))
   (fmt (and (= 0.8.8) :with-test))
   (odoc (and (= 1.5.0) :with-doc))
   (mdx (= 1.6.0))
@@ -30,8 +28,9 @@
  (documentation "https://risto-stevcev.github.io/lambda-streams")
  (depends
   (ocaml (and (>= 4.06.1) (<= 4.10.0)))
-  (lwt (= 5.2.0))
   (lambda_streams (= :version))
+  (lwt (= 5.2.0))
+  (alcotest-lwt (and (= 1.0.1) :with-test))
   (dune (= 2.4.0))))
 
 (package
@@ -40,9 +39,10 @@
  (documentation "https://risto-stevcev.github.io/lambda-streams")
  (depends
   (ocaml (and (>= 4.06.1) (<= 4.10.0)))
+  (lambda_streams (= :version))
+  (alcotest-async (and (= 1.0.1) :with-test))
   (async (= v0.13.0))
   (async_kernel (= v0.13.0))
   (async_unix (= v0.13.0))
   (core (= v0.13.0))
-  (lambda_streams (= :version))
   (dune (= 2.4.0))))

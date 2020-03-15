@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "namespace": true,
   "sources": [{
-    "dir" : "src/lambda_streams",
+    "dir" : "lambda_streams/src",
     "files" : ["Async.ml", "Finite.ml", "Signal.ml", "Sync.ml", "Connection.ml"]
   }],
   "package-specs": {
