@@ -1,6 +1,6 @@
 {
   "name": "lambda-streams",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "namespace": true,
   "sources": [{
     "dir" : "lambda_streams/src",
