@@ -1,6 +1,5 @@
 (lang dune 2.2.0)
 (name lambda_streams)
-(version 0.1.2)
 (source (github Risto-Stevcev/lambda-streams))
 (license BSD-3-Clause)
 (authors "Risto Stevcev")
