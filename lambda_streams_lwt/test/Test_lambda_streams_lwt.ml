@@ -51,6 +51,7 @@ let () =
              test_from_lwt;
              test_to_lwt_stream;
              test_from_lwt_stream;
+             Foo.main;
            ]
            |> List.map (fun test -> Alcotest_lwt.test_case "" `Quick test) );
        ]

@@ -4,7 +4,10 @@
   "namespace": true,
   "sources": [{
     "dir" : "lambda_streams/src",
-    "files" : ["Async.ml", "Finite.ml", "Signal.ml", "Sync.ml", "Connection.ml"]
+    "files": ["Async.ml", "Finite.ml", "Signal.ml", "Sync.ml", "Connection.ml"]
+  }, {
+    "dir": "lambda_streams_js/test",
+    "files": ["Example.ml"]
   }],
   "package-specs": {
     "module": "commonjs",

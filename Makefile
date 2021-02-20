@@ -2,21 +2,21 @@ all: build
 
 .PHONY: clean
 clean:
-	dune clean
-	bsb -clean-world
+	opam exec -- dune clean
+	yarn bsb -clean-world
 
 .PHONY: build
 build:
-	dune build @all
-	bsb -make-world
+	opam exec -- dune build @all
+	yarn bsb -make-world
 
 .PHONY: fmt
 fmt:
-	dune build @fmt --auto-promote
+	opam exec -- dune build @fmt --auto-promote
 
 .PHONY: docs
 docs: clean-docs
-	dune build @doc
+	opam exec -- dune build @doc
 
 .PHONY: copy-docs
 copy-docs: docs
@@ -32,20 +32,40 @@ clean-docs:
 
 .PHONY: test
 test:
-	dune runtest --no-buffer
+	opam exec -- dune runtest --no-buffer
 
 .PHONY: watch
 watch:
-	dune build @all -w
+	opam exec -- dune build @all -w
 
 .PHONY: watch-test
 watch-test:
-	dune runtest --no-buffer -w
+	opam exec -- dune runtest --no-buffer -w
 
 .PHONY: watch-bs
 watch-bs:
-	bsb -make-world -w
+	yarn bsb -make-world -w
 
 .PHONY: utop
 utop:
-	dune utop .
+	opam exec -- dune utop .
+
+.PHONY: remove-switch
+remove-switch:
+	opam switch remove -y .
+
+.PHONY: dev-tools
+dev-tools:
+	opam install -y merlin ocamlformat utop
+
+.PHONY: create-4.08-switch
+create-4.08-switch:
+	opam switch create -y . 4.08.1 -t -d
+
+4.08-switch: remove-switch create-4.08-switch dev-tools
+
+.PHONY: default-switch
+default-switch:
+	opam switch create -y . -t -d
+	make dev-tools
+	eval $(opam env)

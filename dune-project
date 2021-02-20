@@ -13,7 +13,7 @@
  (description "A simple and principled streaming library based on lambdas")
  (documentation "https://risto-stevcev.github.io/lambda-streams")
  (depends
-  (ocaml (>= 4.06.1))
+  (ocaml (>= 4.08))
   (alcotest (and (>= 1.0.1) :with-test))
   (fmt (and (>= 0.8.8) :with-test))
   (mdx (and (>= 1.6.0) :with-test))

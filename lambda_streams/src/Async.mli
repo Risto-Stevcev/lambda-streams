@@ -1,5 +1,5 @@
 (** Generalizes the notion of an asynchronous stream. *)
-type 'a t = private ('a -> unit) -> unit
+type 'a t = private (('a -> unit) -> unit)
 
 type 'a input = 'a t
 
