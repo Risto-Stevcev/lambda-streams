@@ -1,4 +1,4 @@
-(lang dune 2.2.0)
+(lang dune 2.2)
 (name lambda_streams)
 (source (github Risto-Stevcev/lambda-streams))
 (license BSD-3-Clause)
